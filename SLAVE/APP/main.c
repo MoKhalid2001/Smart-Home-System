@@ -29,7 +29,7 @@ const f32 step_size = 4.8828125 ; //vref * 1000 / 1024.0;
 
 BaseType_t xLDRTask,xTempTask,xGasTask;
 
-TaskHandle_t LDR_Handle = NULL, Temp_Handle = NULL, Gas_Handle = NULL, BUZ1_Handle = NULL ;
+TaskHandle_t LDR_Handle = NULL, Temp_Handle = NULL, Gas_Handle = NULL;
 
 void main(){
 	// Initializations :
@@ -44,8 +44,9 @@ void main(){
 		BUZ_Enable = 0 ;
 	}
 
-	xTempTask = xTaskCreate(vTempTaskCode ,"Temperature",configMINIMAL_STACK_SIZE,NULL,1,&Temp_Handle);
-	xLDRTask = xTaskCreate(vLDRTaskCode ,"LDR",configMINIMAL_STACK_SIZE,NULL,1,&LDR_Handle);
+	xTempTask = xTaskCreate(vTempTaskCode ,"Temperature",configMINIMAL_STACK_SIZE,NULL,2,&Temp_Handle);
+	xLDRTask = xTaskCreate(vLDRTaskCode ,"LDR",configMINIMAL_STACK_SIZE,NULL,2,&LDR_Handle);
+	xGasTask = xTaskCreate(vGasTaskCode ,"GAS",configMINIMAL_STACK_SIZE,NULL,1,&Gas_Handle);
 	vTaskStartScheduler();
 
 	while(1);
